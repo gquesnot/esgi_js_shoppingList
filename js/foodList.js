@@ -20,25 +20,38 @@ export class ShoppingList {
 
     addFood() {
         let foodName = this.htmlPageElements.inputAddFood.value;
+        if (foodName){
+            let newFood =new Food(this.foodList.length, foodName, this.htmlPageElements.foodList);
+            this.foodList.push(newFood);
+            this.saveFoodListInLocalStorage();
+        }
+        else{
+            alert("ERREUR: Entrer un nom de produit valide");
+        }
 
-        let newFood =new Food(this.foodList.length, foodName, this.htmlPageElements.foodList);
-        this.foodList.push(newFood);
-        this.saveFoodListInLocalStorage();
     }
 
     delFood() {
         let foodName = this.htmlPageElements.inputDelFood.value;
-        if (! this.removeByFoodName(foodName)){
-            alert(`ERREUR: Le produit ${foodName} n'existe pas dans la liste de courses`);
+        if (foodName){
+
+            if(!this.removeByFoodName(foodName)){
+                alert(`ERREUR: Le produit ${foodName} n'existe pas dans la liste de courses`);
+            }
+            else{
+                this.htmlPageElements.popupDelFood.classList.add("hide");
+            }
         }
-        this.htmlPageElements.popupDelFood.classList.add("hide");
+        else{
+            alert("ERREUR: Entrer un nom de produit valide");
+        }
+
+
     }
 
 
     delAll() {
-        this.foodList.forEach(function (el, idx) {
-            el.removeFromHtml();
-        })
+        this.htmlPageElements.foodList.innerHTML = "";
         this.foodList = [];
         this.saveFoodListInLocalStorage();
 
@@ -56,9 +69,9 @@ export class ShoppingList {
 
     saveFoodListInLocalStorage() {
         let foodNameList = [];
-        this.foodList.forEach(el => {
-            foodNameList.push(el.name);
-        })
+        for (const food in this.foodList){
+            foodNameList.push(food.name)
+        }
         localStorage.setItem("listeCourse", JSON.stringify(foodNameList));
     }
 }
