@@ -61,6 +61,7 @@ export class ShoppingList {
         let foodList = [];
         let foodNameList = JSON.parse(localStorage.getItem("listeCourse")) ?? [];
         for (const [idx, foodName] of foodNameList.entries()){
+
             let newFood = new Food(idx, foodName,this.htmlPageElements.foodList);
             foodList.push(newFood);
         }
@@ -69,7 +70,8 @@ export class ShoppingList {
 
     saveFoodListInLocalStorage() {
         let foodNameList = [];
-        for (const food in this.foodList){
+        for (const food of this.foodList){
+            console.log(food)
             foodNameList.push(food.name)
         }
         localStorage.setItem("listeCourse", JSON.stringify(foodNameList));
