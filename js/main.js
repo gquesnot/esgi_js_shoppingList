@@ -2,6 +2,8 @@
 
 import {ShoppingList} from "./foodList.js";
 
+
+//INIT VAR
 const btnDelAll = document.getElementById("delete");
 
 const btnDel1 = document.getElementById("deleteOne");
@@ -19,7 +21,7 @@ const inputAddFood = document.getElementById("toAdd");
 
 const foodList = document.getElementsByClassName("list")[0];
 
-
+// INIT ShoppingList Class
 const shoppingList = new ShoppingList({
     foodList: foodList,
     inputAddFood: inputAddFood,
@@ -27,7 +29,7 @@ const shoppingList = new ShoppingList({
     popupDelFood: popupDel1Food
 });
 
-
+// LISTENER
 btnDelAll.addEventListener("click", () => shoppingList.delAll())
 
 btnDel1.addEventListener("click", ()=> popupDel1Food.classList.remove("hide"));
