@@ -1,6 +1,6 @@
 "use strict"
 
-import {ShoppingList} from  "./foodList.js";
+import {ShoppingList} from "./foodList.js";
 
 const btnDelAll = document.getElementById("delete");
 
@@ -14,41 +14,39 @@ const inputDel1Food = document.getElementById("toDelete");
 
 const btnSubmitFood = document.getElementById("submit");
 const inputAddFood = document.getElementById("toAdd");
+//const inputNumberAddFood = document.getElementById("toAddNumber");
+
 
 const foodList = document.getElementsByClassName("list")[0];
 
 
 const shoppingList = new ShoppingList({
-    foodList : foodList,
+    foodList: foodList,
     inputAddFood: inputAddFood,
     inputDelFood: inputDel1Food,
     popupDelFood: popupDel1Food
 });
 
 
-btnDelAll.addEventListener("click", function (e) {
-    e.preventDefault();
-    shoppingList.delAll();
+btnDelAll.addEventListener("click", () => shoppingList.delAll())
+
+btnDel1.addEventListener("click", ()=> popupDel1Food.classList.remove("hide"));
+closeDel1FoodPopupIcon.addEventListener("click", () => popupDel1Food.classList.add("hide"));
+
+btnDel1Submit.addEventListener("click", () => shoppingList.delFood())
+inputDel1Food.addEventListener("keydown", function (e) {
+    if (e.code === "Enter") {
+        e.preventDefault();
+        shoppingList.delFood();
+    }
 })
 
-
-btnDel1.addEventListener("click", function (e) {
-    popupDel1Food.classList.remove("hide");
-})
-
-closeDel1FoodPopupIcon.addEventListener("click", function (e){
-    popupDel1Food.classList.add("hide");
-})
-
-btnDel1Submit.addEventListener("click", function (e) {
-    e.preventDefault();
-    shoppingList.delFood();
-})
-
-
-btnSubmitFood.addEventListener("click", function (e){
-    e.preventDefault();
-    shoppingList.addFood();
+btnSubmitFood.addEventListener("click", () => shoppingList.addFood())
+inputAddFood.addEventListener("keydown", function (e) {
+    if (e.code === "Enter") {
+        e.preventDefault();
+        shoppingList.addFood();
+    }
 })
 
 

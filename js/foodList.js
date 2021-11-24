@@ -28,7 +28,6 @@ export class ShoppingList {
         else{
             alert("ERREUR: Entrer un nom de produit valide");
         }
-
     }
 
     delFood() {
@@ -45,8 +44,6 @@ export class ShoppingList {
         else{
             alert("ERREUR: Entrer un nom de produit valide");
         }
-
-
     }
 
 
@@ -59,7 +56,13 @@ export class ShoppingList {
 
     loadFoodListFromLocalStorage() {
         let foodList = [];
-        let foodNameList = JSON.parse(localStorage.getItem("listeCourse")) ?? [];
+        let foodNameList = localStorage.getItem("listeCourse");
+        if (foodNameList){
+            foodNameList = JSON.parse(foodNameList);
+        }
+        else{
+            foodNameList= [];
+        }
         for (const [idx, foodName] of foodNameList.entries()){
 
             let newFood = new Food(idx, foodName,this.htmlPageElements.foodList);
@@ -71,7 +74,6 @@ export class ShoppingList {
     saveFoodListInLocalStorage() {
         let foodNameList = [];
         for (const food of this.foodList){
-            console.log(food)
             foodNameList.push(food.name)
         }
         localStorage.setItem("listeCourse", JSON.stringify(foodNameList));
