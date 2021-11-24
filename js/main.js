@@ -18,7 +18,6 @@ const btnSubmitFood = document.getElementById("submit");
 const inputAddFood = document.getElementById("toAdd");
 //const inputNumberAddFood = document.getElementById("toAddNumber");
 
-
 const foodList = document.getElementsByClassName("list")[0];
 
 // INIT ShoppingList Class
