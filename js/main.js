@@ -28,7 +28,7 @@ const shoppingList = new ShoppingList({
     popupDelFood: popupDel1Food
 });
 
-// LISTENER
+// INIT LISTENER
 btnDelAll.addEventListener("click", () => shoppingList.delAll())
 
 btnDel1.addEventListener("click", ()=> popupDel1Food.classList.remove("hide"));
